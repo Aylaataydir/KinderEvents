@@ -33,4 +33,3 @@
 🔹odeme sistemi koyalim mi eventlar icin yoksa direk organizatorunn kendi sayfasina mi yonlendirelim?
 🔹kategoriler i ayri tabloda mi tutalim.
 
-aaaa
