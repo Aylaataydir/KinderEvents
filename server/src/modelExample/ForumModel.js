@@ -53,11 +53,11 @@ const forumSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        isPinned: {
+        isPinned: {    // sabitleme.    
             type: Boolean,
             default: false,
         },
-        isLocked: {
+        isLocked: {    // yorum yapmaya devam edilemiycek. ama diger yorumlar durucak.
             type: Boolean,
             default: false,
         },
@@ -137,9 +137,6 @@ forumSchema.methods.toggleLike = function (userId) {
 
 const Forum = mongoose.model('Forum', forumSchema);
 module.exports = Forum;
-
-
-
 
 
 
