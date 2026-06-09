@@ -5,37 +5,37 @@ const bcrypt = require('bcryptjs');
 
 // ─── Alt Şemalar ────────────────────────────────────────────────
 
-const childSchema = new mongoose.Schema(
-  {
-    birthYear: {
-      type: Number,
-      required: [true, 'Doğum yılı zorunludur'],
-      min: [new Date().getFullYear() - 14, 'Çocuk en fazla 14 yaşında olabilir'],
-      max: [new Date().getFullYear(), 'Geçerli bir doğum yılı giriniz'],
-    },
-    gender: {
-      type: String,
-      enum: ['male', 'female', 'other', 'prefer_not_to_say'],
-      default: 'prefer_not_to_say',
-    },
-    // interests: [
-    //   {
-    //     type: String,
-    //     enum: ['art', 'sports', 'science', 'music', 'nature', 'technology', 'cooking', 'reading'],
-    //   },
-    // ],
-  },
-  { _id: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
-);
+// const childSchema = new mongoose.Schema(
+//   {
+//     birthYear: {
+//       type: Number,
+//       required: [true, 'Doğum yılı zorunludur'],
+//       min: [new Date().getFullYear() - 14, 'Çocuk en fazla 14 yaşında olabilir'],
+//       max: [new Date().getFullYear(), 'Geçerli bir doğum yılı giriniz'],
+//     },
+//     gender: {
+//       type: String,
+//       enum: ['male', 'female', 'other', 'prefer_not_to_say'],
+//       default: 'prefer_not_to_say',
+//     },
+//     // interests: [
+//     //   {
+//     //     type: String,
+//     //     enum: ['art', 'sports', 'science', 'music', 'nature', 'technology', 'cooking', 'reading'],
+//     //   },
+//     // ],
+//   },
+//   { _id: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+// );
 
-// Doğum yılından yaş grubunu otomatik hesaplar
-childSchema.virtual('ageGroup').get(function () {
-  const age = new Date().getFullYear() - this.birthYear;
-  if (age <= 2) return '0-2';
-  if (age <= 5) return '3-5';
-  if (age <= 10) return '6-10';
-  return '11-14';
-});
+// // Doğum yılından yaş grubunu otomatik hesaplar
+// childSchema.virtual('ageGroup').get(function () {
+//   const age = new Date().getFullYear() - this.birthYear;
+//   if (age <= 2) return '0-2';
+//   if (age <= 5) return '3-5';
+//   if (age <= 10) return '6-10';
+//   return '11-14';
+// });
 
 // ─────────────────────────────────────────────────────────────────
 
@@ -166,10 +166,10 @@ const userSchema = new mongoose.Schema(
       enum: ['parent', 'organizer', 'admin'],
       default: 'parent',
     },
-    hasChildren: {
-      type: Boolean,
-      default: false,  // kayıt sırasında çocuk eklendiyse true olur
-    },
+    // hasChildren: {
+    //   type: Boolean,
+    //   default: false,  // kayıt sırasında çocuk eklendiyse true olur
+    // },
     isActive: {
       type: Boolean,
       default: true,
@@ -201,26 +201,26 @@ const userSchema = new mongoose.Schema(
     },
 
     // ── Ebeveyne Özel Alanlar ─────────────────────────────────────
-    children: {
-      type: [childSchema],
-      default: undefined,
-      // validate: {
-      //   validator: function (val) {
-      //     // Ebeveyn rolündeyse en az 1 çocuk zorunlu
-      //     if (this.role === 'parent') return val && val.length > 0;
-      //     return true;
-      //   },
-      //   message: 'Ebeveyn hesabı için en az bir çocuk profili zorunludur',
-      // },
-    },
-    // canCreateEvents: {
-    //   type: Boolean,
-    //   default: false, // Ebeveyn etkinlik oluşturmak isterse true yapılır
+    // children: {
+    //   type: [childSchema],
+    //   default: undefined,
+    //   // validate: {
+    //   //   validator: function (val) {
+    //   //     // Ebeveyn rolündeyse en az 1 çocuk zorunlu
+    //   //     if (this.role === 'parent') return val && val.length > 0;
+    //   //     return true;
+    //   //   },
+    //   //   message: 'Ebeveyn hesabı için en az bir çocuk profili zorunludur',
+    //   // },
     // },
-    activeChildId: {      // eger userin birden fazla cocugu varsa frontendde cocuk secebilecegi bir alan olucak ve burdan sectigi cocuga gore icerikler gelicek.
-      type: mongoose.Schema.Types.ObjectId,
-      default: null,
-    },
+    // // canCreateEvents: {
+    // //   type: Boolean,
+    // //   default: false, // Ebeveyn etkinlik oluşturmak isterse true yapılır
+    // // },
+    // activeChildId: {      // eger userin birden fazla cocugu varsa frontendde cocuk secebilecegi bir alan olucak ve burdan sectigi cocuga gore icerikler gelicek.
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   default: null,
+    // },
 
     // ── Organizatöre Özel Alanlar ─────────────────────────────────
     institution: {
@@ -235,9 +235,9 @@ const userSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Event',
         },
-        childId: {
-          type: mongoose.Schema.Types.ObjectId,
-        },
+        // childId: {
+        //   type: mongoose.Schema.Types.ObjectId,
+        // },
         registeredAt: {
           type: Date,
           default: Date.now,
